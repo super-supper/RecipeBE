@@ -1,4 +1,4 @@
-const pgConnection = process.env.DATABASE_URL;
+const dbSocketPath = process.env.DB_SOCKET_PATH || "/cloudsql";
 
 
 module.exports = {
@@ -23,7 +23,12 @@ module.exports = {
   },
   production: {
     client: "pg",
-    connection: pgConnection,
+    connection: {
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
+      host: `${dbSocketPath}/${process.env.CLOUD_SQL_CONNECTION_NAME}`
+    },
     pool: {
       min: 2,
       max: 10,
