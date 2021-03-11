@@ -1,14 +1,14 @@
 const db = require("../database/dbConfig")
 
 class StepDAO {
-    async createStep(stepNum, steps, recipe) {
-        const [step] = await db("steps").insert({
+    async createStep(stepNum, step, recipe_id) {
+        let x ;
+        x = await db("steps").insert({
             step_num: stepNum,
-            steps,
-            recipe
-        }).returning("step");
-
-        return step;
+            step,
+            recipe_id
+        });
+        return x;
     }
 
     async getRecipeSteps(id) {

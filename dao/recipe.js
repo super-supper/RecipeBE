@@ -8,7 +8,6 @@ class RecipeDAO {
         const recipeList = await db.select()
             .table("recipes")
             .orderBy("title")
-        console.log(recipeList);
         return recipeList;
     }
 
@@ -50,7 +49,7 @@ class RecipeDAO {
         })
 
         steps.forEach( s => {
-            stepDAO.createStep(s.stepNum, step, recipe_id);
+            stepDAO.createStep(s.stepNum, s.step, recipe_id);
         })
 
         return recipe_id;

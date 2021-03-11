@@ -3,11 +3,16 @@ const pgConnection = process.env.DATABASE_URL;
 
 module.exports = {
   development: {
-    client: "mysql",
-    connection: process.env.DATABASE_URL,
+    client: "pg",
+    connection: {
+      host: "localhost",
+      user: "postgres",
+      password: "102030",
+      database: "SS"
+    },
     useNullAsDefault: true,
-    migrations: { directory: './database/migrations' },
-    seeds: { directory: './database/seeds' },
+    migrations: { directory: './migrations' },
+    seeds: { directory: './seeds' },
   },
   testing: {
     client: "mysql",

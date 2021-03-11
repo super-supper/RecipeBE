@@ -13,14 +13,14 @@ class IngredientDAO {
         return ingredientList;
     }
 
-    async createIngredient(ingredients, qty, recipe) {
-       const [ingredient] = await db("ingredients").insert({
-            ingredients,
+    async createIngredient(ingredient, qty, recipe_id) {
+       let x;
+       x = await db("ingredients").insert({
+            ingredient,
             qty,
-            recipe
-        }).returning("ingredient");
-
-       return ingredient;
+            recipe_id
+        });
+        return x;
     }
 }
 
