@@ -48,3 +48,7 @@ yarn-error.log*
 
 # vercel
 .vercel
+
+# Google App Enginge
+app.yaml
+*.yaml
