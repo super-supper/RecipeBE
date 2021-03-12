@@ -10,6 +10,16 @@ class RecipeService {
         return recipeDAO.createRecipe(title, description, url, ingredients, steps);
 
     }
+
+    getRecipeById(req) {
+        const id  = req.params.id;
+        return recipeDAO.getRecipeByID(id);
+    }
+
+    deleteRecipeById(req) {
+        const id = req.params.id;
+        return recipeDAO.deleteRecipeById(id);
+    }
 }
 
 module.exports = new RecipeService();

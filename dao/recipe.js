@@ -12,27 +12,17 @@ class RecipeDAO {
     }
 
     async getRecipeByID(id) {
-        const [recipe_id, title, description, url] = await db
+        const [recipe] = await db
             .where("recipe_id", id)
             .select()
             .from("recipes");
 
-        const r = new recipeModel(recipe_id,  title, description, url);
+        if (recipe == null) throw `Recipe_ID ${id} not found!`;
 
-        // const ingredientList = await db
-        //     .where("indredient_id", recipe_id)
-        //     .select("ingredient", "qty")
-        //     .from("ingredients")
-        //     .orderBy("qty");
-        //
-        // const stepList = await db
-        //     .where("step_id", recipe_id)
-        //     .select("step_num", "step")
-        //     .from("steps")
-        //     .orderBy("step_num");
+        const r = new recipeModel(recipe.recipe_id,  recipe.title, recipe.description, recipe.url);
 
-        r.ingredients = ingredientDAO.getRecipesIngredients(recipe_id);
-        r.steps = stepDAO.getRecipeSteps(recipe_id);
+        r.ingredients = await ingredientDAO.getRecipesIngredients(recipe.recipe_id);
+        r.steps = await stepDAO.getRecipeSteps(recipe.recipe_id);
 
         return r;
     }
@@ -54,6 +44,13 @@ class RecipeDAO {
 
         return recipe_id;
     }
+
+    async deleteRecipeById(id) {
+        return await db("recipes")
+            .where("recipe_id", id)
+            .del()
+    }
 }
+
 
 module.exports = new RecipeDAO();

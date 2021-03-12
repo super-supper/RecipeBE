@@ -8,5 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.get("/recipes", recipeController.getAllRecipes);
 router.post("/recipes", recipeController.addRecipe);
+router.get("/recipes/:id", recipeController.getRecipeById);
+router.delete("/recipes/:id", recipeController.deleteRecipe);
 
 module.exports = router;

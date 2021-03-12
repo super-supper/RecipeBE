@@ -16,7 +16,7 @@ env_variables:
   DB_SOCKET_PATH: "/cloudsql"
   DB_USER: "super-supper"
   DB_PASS: "rLjGc9LwFzOjMvsm"
-  DB_NAME: "super-supper"
+  DB_NAME: "SS"
   CLOUD_SQL_CONNECTION_NAME: "super-supper:us-east1:super-supper"
 
 

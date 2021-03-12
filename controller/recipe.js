@@ -6,8 +6,7 @@ class RecipeController {
             const recipeList = await recipeService.getRecipes();
             res.status(200).json(recipeList);
         } catch (err) {
-            res.status(500);
-            console.log(err)
+            res.status(500).json(err);
             debugger;
         }
     };
@@ -17,8 +16,25 @@ class RecipeController {
             const id = await recipeService.createRecipe(req.body);
             res.status(201).json(id);
         } catch (err) {
-            console.log(err)
-            res.status(500);
+            res.status(500).json(err);
+        }
+    }
+
+    async getRecipeById(req, res) {
+        try {
+            const recipe = await recipeService.getRecipeById(req);
+            res.status(200).json(recipe);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+
+    async deleteRecipe(req, res) {
+        try {
+            await recipeService.deleteRecipeById(req);
+            res.status(200).json("Success!");
+        } catch (err) {
+            res.status(500).json(err);
         }
     }
 }

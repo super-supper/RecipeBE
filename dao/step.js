@@ -14,7 +14,7 @@ class StepDAO {
     async getRecipeSteps(id) {
         let stepList;
         stepList = await db
-            .where("step_id", id)
+            .where("recipe_id", id)
             .select("step_num", "step")
             .from("steps")
             .orderBy("step_num");
