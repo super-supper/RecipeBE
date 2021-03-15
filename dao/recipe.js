@@ -1,7 +1,8 @@
-const db = require("../database/dbConfig")
+const db = require("../database/dbConfig");
 const recipeModel = require("../model/recipeModel");
 const ingredientDAO = require("./ingredient");
 const stepDAO = require("./step");
+const recipeTagDAO = require("./recipeTags");
 
 class RecipeDAO {
     async getAllRecipes() {
@@ -23,11 +24,12 @@ class RecipeDAO {
 
         r.ingredients = await ingredientDAO.getRecipesIngredients(recipe.recipe_id);
         r.steps = await stepDAO.getRecipeSteps(recipe.recipe_id);
+        r.tags = await recipeTagDAO.getRecipesTags(recipe.recipe_id);
 
         return r;
     }
 
-    async createRecipe(title, description, url, ingredients, steps) {
+    async createRecipe(title, description, url, ingredients, steps, tags) {
         const [recipe_id] = await db("recipes").insert({
             title,
             description,
@@ -42,13 +44,20 @@ class RecipeDAO {
             stepDAO.createStep(s.stepNum, s.step, recipe_id);
         })
 
+        tags.forEach(t => {
+            console.log(t);
+            recipeTagDAO.createRecipeTag(recipe_id, t.tag_id);
+        })
+
         return recipe_id;
     }
 
     async deleteRecipeById(id) {
-        return await db("recipes")
+        let x;
+        x = await db("recipes")
             .where("recipe_id", id)
-            .del()
+            .del();
+        return x;
     }
 }
 

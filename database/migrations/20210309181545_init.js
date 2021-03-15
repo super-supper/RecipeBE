@@ -45,6 +45,12 @@ exports.up = function(knex) {
               .references("recipes.recipe_id")
               .onDelete("CASCADE")
               .onUpdate("CASCADE");
+          table.integer("tag_id")
+              .unsigned()
+              .notNullable()
+              .references("tags.tag_id")
+              .onUpdate("CASCADE")
+              .onDelete("CASCADE");
       })
 
 };

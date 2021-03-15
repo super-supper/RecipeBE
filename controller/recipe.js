@@ -1,4 +1,5 @@
-const recipeService = require("../service/recipe")
+const recipeService = require("../service/recipe");
+const recipeTagService = require("../service/recipeTag");
 
 class RecipeController {
     async getAllRecipes(req, res) {
@@ -7,7 +8,6 @@ class RecipeController {
             res.status(200).json(recipeList);
         } catch (err) {
             res.status(500).json(err);
-            debugger;
         }
     };
 
@@ -33,6 +33,33 @@ class RecipeController {
         try {
             await recipeService.deleteRecipeById(req);
             res.status(200).json("Success!");
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+
+    async getRecipesTags(req, res) {
+        try {
+            const recipeTagList = await recipeTagService.getRecipesTags(req);
+            res.status(200).json(recipeTagList);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+
+    async addRecipeTag(req, res) {
+        try {
+            await recipeTagService.addRecipeTag(req);
+            res.status(201).json("Success!");
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+
+    async deleteTag(req, res) {
+        try {
+            await recipeTagService.deleteRecipeTag(req);
+            res.status(200).json("Success!")
         } catch (err) {
             res.status(500).json(err);
         }

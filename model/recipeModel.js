@@ -6,6 +6,7 @@ class Recipe {
         this.url = url;
         this.ingredients = [];
         this.steps = [];
+        this.tags = [];
     }
 
     addIngredient(ingredient) {
@@ -14,6 +15,10 @@ class Recipe {
 
     addStep(step) {
         this.steps.push(step);
+    }
+
+    addTag(tag) {
+        this.tags.push(tag);
     }
 }
 

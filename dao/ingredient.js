@@ -9,7 +9,6 @@ class IngredientDAO {
             .select("ingredient", "qty")
             .from("ingredients")
             .orderBy("qty");
-        console.log(id, ingredientList);
         return ingredientList;
     }
 
