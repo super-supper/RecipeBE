@@ -15,8 +15,8 @@ router.delete("/recipes/:id", recipeController.deleteRecipe);
 router.post(
     "/recipes",
     body("title").not().isEmpty().trim().stripLow().escape(),
-    body("description").not().isEmpty().trim().isURL().stripLow().escape(),
-    body("url").not().isEmpty().trim().stripLow().escape(),
+    body("description").not().isEmpty().trim().stripLow().escape(),
+    body("url").not().isEmpty().trim().isURL(),
     check("ingredients.*.ingredient").not().isEmpty().trim().stripLow().escape(),
     check("ingredients.*.qty").not().isEmpty().trim().stripLow().escape(),
     check("steps.*.step_num").toInt(),
