@@ -1,6 +1,8 @@
 const recipeService = require("../service/recipe");
 const recipeTagService = require("../service/recipeTag");
 
+const { validationResult } = require("express-validator");
+
 class RecipeController {
     async getAllRecipes(req, res) {
         try {
@@ -12,6 +14,12 @@ class RecipeController {
     };
 
     async addRecipe(req,res) {
+
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         try {
             const id = await recipeService.createRecipe(req.body);
             res.status(201).json(id);
