@@ -1,10 +1,10 @@
 const db = require("../database/dbConfig")
 
 class StepDAO {
-    async createStep(stepNum, step, recipe_id) {
+    async createStep(step_num, step, recipe_id) {
         let x ;
         x = await db("steps").insert({
-            step_num: stepNum,
+            step_num,
             step,
             recipe_id
         });

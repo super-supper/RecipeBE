@@ -19,9 +19,9 @@ router.post(
     body("url").not().isEmpty().trim().isURL(),
     check("ingredients.*.ingredient").not().isEmpty().trim().stripLow().escape(),
     check("ingredients.*.qty").not().isEmpty().trim().stripLow().escape(),
-    check("steps.*.step_num").toInt(),
+    check("steps.*.step_num").not().isEmpty().trim().stripLow().escape(),
     check("steps.*.step").not().isEmpty().trim().stripLow().escape(),
-    check("tags.*.tag_id").toInt(),
+    check("tags.*.tag_id").not().isEmpty().trim().stripLow().escape(),
     recipeController.addRecipe);
 
 router.get("/tags", tagController.getAllTags);

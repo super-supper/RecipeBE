@@ -41,11 +41,10 @@ class RecipeDAO {
         })
 
         steps.forEach( s => {
-            stepDAO.createStep(s.stepNum, s.step, recipe_id);
+            stepDAO.createStep(s.step_num, s.step, recipe_id);
         })
 
         tags.forEach(t => {
-            console.log(t);
             recipeTagDAO.createRecipeTag(recipe_id, t.tag_id);
         })
 
