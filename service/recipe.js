@@ -1,8 +1,8 @@
 const recipeDAO = require("../dao/recipe");
 
 class RecipeService {
-    getRecipes() {
-        return  recipeDAO.getAllRecipes()
+    getRecipes(req) {
+        return  recipeDAO.getAllRecipes(req.query.limit, req.skip)
     }
 
     createRecipe(req) {

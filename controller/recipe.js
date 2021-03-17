@@ -2,12 +2,20 @@ const recipeService = require("../service/recipe");
 const recipeTagService = require("../service/recipeTag");
 
 const { validationResult } = require("express-validator");
+const paginate = require('express-paginate');
 
 class RecipeController {
     async getAllRecipes(req, res) {
         try {
-            const recipeList = await recipeService.getRecipes();
-            res.status(200).json(recipeList);
+            const [ results, itemCount ] = await recipeService.getRecipes(req);
+
+            const pageCount = Math.ceil(itemCount / req.query.limit);
+
+            res.status(200).json({
+                object: "list",
+                has_more: paginate.hasNextPages(req)(pageCount),
+                data: results
+            });
         } catch (err) {
             res.status(500).json(err);
         }

@@ -5,11 +5,15 @@ const stepDAO = require("./step");
 const recipeTagDAO = require("./recipeTags");
 
 class RecipeDAO {
-    async getAllRecipes() {
-        const recipeList = await db.select()
+    async getAllRecipes(limit, offset) {
+        const results = await db.select()
             .table("recipes")
-            .orderBy("title")
-        return recipeList;
+            .limit(limit)
+            .offset(offset)
+
+        const count = results.length;
+
+        return [ results, count ];
     }
 
     async getRecipeByID(id) {
