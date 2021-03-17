@@ -55,6 +55,11 @@ class RecipeController {
     }
 
     async addRecipeTag(req, res) {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json({ errors: errors.array() });
+        }
+
         try {
             await recipeTagService.addRecipeTag(req);
             res.status(201).json("Success!");

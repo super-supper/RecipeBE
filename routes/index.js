@@ -26,10 +26,17 @@ router.post(
 
 router.get("/tags", tagController.getAllTags);
 router.delete("/tags/:id", tagController.deleteTag);
-router.post("/tags", tagController.addTag);
+router.post(
+    "/tags",
+    body("tag").not().isEmpty().trim().stripLow().escape(),
+    tagController.addTag);
 
 router.get("/recipes/tags/:id", recipeController.getRecipesTags);
 router.delete("/recipes/tags/delete/:id", recipeController.deleteTag);
-router.post("/recipes/tags", recipeController.addRecipeTag);
+router.post(
+    "/recipes/tags",
+    body("recipe_id").trim().isInt(),
+    body("tag_id").trim().isInt(),
+    recipeController.addRecipeTag);
 
 module.exports = router;
