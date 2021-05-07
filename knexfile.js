@@ -5,14 +5,14 @@ module.exports = {
   development: {
     client: "pg",
     connection: {
-      host: "localhost",
+      host: "psql",
       user: "postgres",
       password: "102030",
-      database: "SS"
+      database: "ss"
     },
     useNullAsDefault: true,
-    migrations: { directory: './migrations' },
-    seeds: { directory: './seeds' },
+    migrations: { directory: './database/migrations' },
+    seeds: { directory: './database/seeds' },
   },
   testing: {
     client: "mysql",
