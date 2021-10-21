@@ -6,8 +6,8 @@ class RecipeService {
     }
 
     createRecipe(req) {
-        const { title, description, url, ingredients, steps, tags } = req;
-        return recipeDAO.createRecipe(title, description, url, ingredients, steps, tags);
+        const { title, description, url, imgUrl, totalTime, prepTime, cookTime, yields, feeds, ingredients, steps, tags } = req;
+        return recipeDAO.createRecipe(title, description, url, imgUrl, totalTime, prepTime, cookTime, yields, feeds, ingredients, steps, tags);
 
     }
 

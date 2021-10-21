@@ -19,8 +19,8 @@ class TagController {
         }
 
         try {
-            await tagService.createTag(req.body);
-            res.status(201).json("Success!");
+            let t = await tagService.createTag(req.body);
+            res.status(201).json({tag_id: t});
         } catch (err) {
             res.status(500).json(err);
         }

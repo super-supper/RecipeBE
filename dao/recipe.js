@@ -24,7 +24,7 @@ class RecipeDAO {
 
         if (recipe == null) throw `Recipe_ID ${id} not found!`;
 
-        const r = new recipeModel(recipe.recipe_id,  recipe.title, recipe.description, recipe.url);
+        const r = new recipeModel(recipe.recipe_id,  recipe.title, recipe.description, recipe.url, recipe.img_url, recipe.total_time, recipe.prep_time, recipe.cook_time, recipe.yields, recipe.feeds);
 
         r.ingredients = await ingredientDAO.getRecipesIngredients(recipe.recipe_id);
         r.steps = await stepDAO.getRecipeSteps(recipe.recipe_id);
@@ -33,11 +33,17 @@ class RecipeDAO {
         return r;
     }
 
-    async createRecipe(title, description, url, ingredients, steps, tags) {
+    async createRecipe(title, description, url, img_url, total_time, prep_time, cook_time, yields, feeds, ingredients, steps, tags) {
         const [recipe_id] = await db("recipes").insert({
             title,
             description,
-            url
+            url,
+            img_url,
+            total_time,
+            prep_time,
+            cook_time,
+            yields,
+            feeds
         }).returning("recipe_id");
 
         ingredients.forEach( i => {

@@ -6,6 +6,12 @@ exports.up = function(knex) {
       recipes.string("title", 255).notNullable();
       recipes.string("description", 255).notNullable();
       recipes.string("url", 255);
+      recipes.string("img_url", 255);
+      recipes.string("total_time", 255);
+      recipes.string("prep_time", 255);
+      recipes.string("cook_time", 255);
+      recipes.string("yields", 255);
+      recipes.string("feeds", 255);
       recipes.timestamps(true, true );
   })
       .createTable("ingredients", ingredients => {

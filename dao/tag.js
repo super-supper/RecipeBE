@@ -3,8 +3,7 @@ const db = require("../database/dbConfig")
 class TagDAO {
     async getAllTags() {
         let tags;
-        tags = await  db()
-            .select()
+        tags = await  db.select()
             .table("tags")
             .orderBy("tag");
 
@@ -14,6 +13,7 @@ class TagDAO {
     async createTag(tag){
         let t;
         t = await db("tags")
+            .returning("tag_id")
             .insert({
                 tag
             });
